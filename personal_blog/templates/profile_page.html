@@ -9,7 +9,14 @@
 {%block section%}
 <div class="wrapper">
     <div class="profile_section">
-        profile section
+        <div class="profile_pic"></div>
+        <h2>{{request.user.first_name}} {{request.user.last_name}}</h2>
+        <div class="bio_box">{{profile.bio}}</div>
+        <div class="about">
+            <h4>work as <span>{{profile.profession}}</span> at <span>{{profile.workplace}}</span></h4>
+            <h4>{{profile.relationStatus}}</h4>
+            <h4>From {{profile.area}}</h4>
+        </div>
     </div>
     <div class="post_section">
         <div class="post">

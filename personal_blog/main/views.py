@@ -118,7 +118,17 @@ def home(request):
 def profile_page(request, pk):
     user = User.objects.get(username=pk)
     user_post = PostDB.objects.filter(user=user)
-
+    profile = Profile.objects.get(user=user)
+    if request.method == "POST":
+        post = request.POST["postInput"]
+        new_post = PostDB.objects.create(
+            user=user,
+            userId=user.id,
+            post=post,
+        )
+        new_post.save()
+        return redirect('profile', request.user.username)
     return render(request, 'profile_page.html', {
         "posts": user_post,
+        "profile": profile,
     })
