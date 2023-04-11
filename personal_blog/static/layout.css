@@ -39,6 +39,14 @@ nav {
 	align-items: center;
 }
 
+.right-nav a {
+    text-decoration: none;
+    color: white;
+	margin: 0;
+	font-size: 24px;
+	font-weight: bold;
+}
+
 .avatar {
 	width: 30px;
 	height: 30px;
@@ -46,13 +54,7 @@ nav {
 	background-color: #515151;
 	margin-right: 10px;
 }
-.right-nav .pro{
-    text-decoration: none;
-    color: white;
-}
-.right-nav .pro h4{
-    margin-right: 1.5rem;
-}
+
 
 
 .green-btn {
