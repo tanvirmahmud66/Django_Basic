@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+	<title>
+        {%block title%}{%endblock title%}
+    </title>
+    {%block link%}{%endblock link%}
+    <link rel="stylesheet" href="{%static 'layout.css'%}"/>
+    
+</head>
+<body>
+	<nav>
+		<div class="left-nav">
+			<a href="{%url 'home'%}">Brand Name</a>
+		</div>
+		{%if request.user.is_authenticated%}
+        <div class="right-nav">
+			<div class="avatar"></div>
+            <h4 class="fullname">
+                {{request.user.first_name}}
+            </h4>
+			<a href="{%url 'logout'%}" class="green-btn">Logout</a>
+		</div>
+        {%endif%}
+	</nav>
+	{%block section%}{%endblock section%}
+</body>
+</html>

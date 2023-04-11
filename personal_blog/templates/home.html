@@ -1,0 +1,37 @@
+{%extends 'layout.html'%}
+{%load static%}
+{% load humanize %}
+{%block title%}Home | Personal Blog{%endblock title%}
+{%block link%} 
+<link rel="stylesheet" href="{%static 'home.css'%}"/>
+{%endblock link%}
+
+{%block section%}
+    <div class="posting_wrapper">
+        <div class="post">
+            <form class="post_form" method="POST">
+                {%csrf_token%}
+                <textarea id="postInput" name="postInput" placeholder="Write your post..." required></textarea>
+                <input type="submit" class="post-green-btn" value="Post"/>
+            </form>
+        </div>
+        {%for each in posts%}
+        <div class="post">
+            <div class="post_view">
+                <h3>{{each.user.first_name}} {{each.user.last_name}}</h3>
+                <div class="date_time">
+                    <p>
+                        {{each.created| timesince}} ago
+                    </p>
+                    <p>
+                        {{each.created.date}}
+                    </p>
+                </div>
+                <div class="post_body">
+                    <p>{{each.post}}</p>
+                </div>
+            </div>
+        </div>
+        {%endfor%}       
+    </div>
+{%endblock section%}
