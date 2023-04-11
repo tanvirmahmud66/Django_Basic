@@ -107,7 +107,18 @@ def home(request):
             user=user_model, userId=user_model.id, post=post
         )
         new_post.save()
+        return redirect('home')
     posts = PostDB.objects.all()
     return render(request, 'home.html', {
         "posts": posts,
+    })
+
+
+@login_required(login_url='signin')
+def profile_page(request, pk):
+    user = User.objects.get(username=pk)
+    user_post = PostDB.objects.filter(user=user)
+
+    return render(request, 'profile_page.html', {
+        "posts": user_post,
     })

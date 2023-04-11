@@ -17,9 +17,11 @@
 		{%if request.user.is_authenticated%}
         <div class="right-nav">
 			<div class="avatar"></div>
-            <h4 class="fullname">
-                {{request.user.first_name}}
-            </h4>
+				<a class="pro" href="{%url 'profile' request.user.username%}">
+					<h4 class="fullname">
+						{{request.user.first_name}} {{request.user.last_name}}
+					</h4>
+				</a>
 			<a href="{%url 'logout'%}" class="green-btn">Logout</a>
 		</div>
         {%endif%}

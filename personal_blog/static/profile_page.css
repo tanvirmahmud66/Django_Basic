@@ -1,14 +1,16 @@
-p{
-    color: white;
+.wrapper{
+    width: 100%;
+    min-height: 100vh;
+    padding: 15px;
+    margin-top: 70px;
+    display: flex;
+    justify-content: space-between;
 }
-.posting_wrapper{
-    margin-top: 4.5rem;
-    width: 900px;
-    border-radius: 10px;
-    color: white;
+.post_section{
+    width: 600px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* justify-content: center; */
 }
 .post{
     width: 100%;
@@ -43,6 +45,7 @@ p{
 .post_view h3{
     font-size: 1.4rem;
     font-weight: 500;
+    color: rgb(255, 255, 255);
 }
 .date_time{
     margin: 3px 0 15px 0;
