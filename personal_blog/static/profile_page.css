@@ -115,3 +115,32 @@
     font-size: 1.2rem;
     color: rgb(211, 211, 211);
 }
+
+.button_group{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.delete_button{
+    margin-top: 10px;
+    text-decoration: none;
+    border: 1px solid #00b894;
+	background-color: #00b894;
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px 20px;
+	cursor: pointer;
+    font-weight: 500;
+}
+.edit_button{
+    margin-top: 10px;
+    text-decoration: none;
+    border: 1px solid #00b894;
+	background-color: #00b894;
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px 20px;
+	cursor: pointer;
+    font-weight: 500;
+}
