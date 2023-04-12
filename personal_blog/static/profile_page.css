@@ -117,7 +117,8 @@
 }
 
 .post_view .button_group{
-    width: 50%;
+    width: 38%;
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -125,11 +126,11 @@
 .post_view .delete_button{
     margin-top: 10px;
     text-decoration: none;
-    border: 1px solid #00b894;
-	background-color: #00b894;
+    border: 1px solid #e93434;
+	background-color: #e93434;
 	color: #fff;
 	border-radius: 5px;
-	padding: 10px 20px;
+	padding: 5px 10px;
 	cursor: pointer;
     font-weight: 500;
 }
@@ -140,7 +141,7 @@
 	background-color: #00b894;
 	color: #fff;
 	border-radius: 5px;
-	padding: 10px 20px;
+	padding: 5px 10px;
 	cursor: pointer;
     font-weight: 500;
 }
