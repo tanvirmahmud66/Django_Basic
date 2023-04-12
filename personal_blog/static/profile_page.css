@@ -116,13 +116,13 @@
     color: rgb(211, 211, 211);
 }
 
-.button_group{
-    width: 40%;
+.post_view .button_group{
+    width: 50%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
-.delete_button{
+.post_view .delete_button{
     margin-top: 10px;
     text-decoration: none;
     border: 1px solid #00b894;
@@ -133,7 +133,7 @@
 	cursor: pointer;
     font-weight: 500;
 }
-.edit_button{
+.post_view .edit_button{
     margin-top: 10px;
     text-decoration: none;
     border: 1px solid #00b894;

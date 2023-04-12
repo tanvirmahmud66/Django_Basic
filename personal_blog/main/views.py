@@ -162,3 +162,8 @@ def edit_profile(request):
         "user": user,
         "profile": profile,
     })
+
+
+def delete_post(request, pk):
+    post = PostDB.objects.get(id=pk)
+    return render(request, 'delete_post.html')
