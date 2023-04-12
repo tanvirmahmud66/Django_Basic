@@ -132,3 +132,33 @@ def profile_page(request, pk):
         "posts": user_post,
         "profile": profile,
     })
+
+
+@login_required(login_url='signin')
+def edit_profile(request):
+    user = User.objects.get(username=request.user.username)
+    profile = Profile.objects.get(user=request.user)
+    if request.method == "POST":
+        first_name = request.POST["first_name"]
+        last_name = request.POST["last_name"]
+        user.first_name = first_name
+        user.last_name = last_name
+        user.save()
+        workplace = request.POST["workplace"]
+        profession = request.POST["profession"]
+        gender = request.POST["gender"]
+        relationship = request.POST["relationship"]
+        bio = request.POST["bio"]
+        area = request.POST["district"]
+        profile.workplace = workplace
+        profile.profession = profession
+        profile.gender = gender
+        profile.relationStatus = relationship
+        profile.bio = bio
+        profile.area = area
+        profile.save()
+        return redirect('profile', request.user.username)
+    return render(request, 'edit_profile.html', {
+        "user": user,
+        "profile": profile,
+    })
