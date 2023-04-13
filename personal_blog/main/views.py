@@ -173,3 +173,16 @@ def delete_post(request, pk):
     return render(request, 'delete_post.html', {
         "post": post,
     })
+
+
+@login_required(login_url='signin')
+def edit_post(request, pk):
+    posts = PostDB.objects.get(id=pk)
+    if request.method == "POST":
+        update_post = request.POST["editField"]
+        posts.post = update_post
+        posts.save()
+        return redirect('profile', request.user.username)
+    return render(request, 'edit_post.html', {
+        "post": posts,
+    })
