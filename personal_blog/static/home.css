@@ -59,3 +59,33 @@ p{
     font-size: 1.2rem;
     color: rgb(211, 211, 211);
 }
+
+.post_view .button_group{
+    width: 24%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.post_view .delete_button{
+    margin-top: 10px;
+    text-decoration: none;
+    border: 1px solid #e93434;
+	background-color: #e93434;
+	color: #fff;
+	border-radius: 5px;
+	padding: 5px 10px;
+	cursor: pointer;
+    font-weight: 500;
+}
+.post_view .edit_button{
+    margin-top: 10px;
+    text-decoration: none;
+    border: 1px solid #00b894;
+	background-color: #00b894;
+	color: #fff;
+	border-radius: 5px;
+	padding: 5px 10px;
+	cursor: pointer;
+    font-weight: 500;
+}

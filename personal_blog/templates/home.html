@@ -30,6 +30,12 @@
                 <div class="post_body">
                     <p>{{each.post}}</p>
                 </div>
+                {%if each.user == request.user%}
+                <div class="button_group">
+                    <a class="edit_button" href="{%url 'edit' each.id%}">Edit Post</a>
+                    <a class="delete_button" href="{%url 'delete' each.id%}">Delete Post</a>
+                </div>
+                {%endif%}
             </div>
         </div>
         {%endfor%}       
