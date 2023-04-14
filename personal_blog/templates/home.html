@@ -5,6 +5,11 @@
 {%block link%} 
 <link rel="stylesheet" href="{%static 'home.css'%}"/>
 {%endblock link%}
+{%block navImg%}
+    {%if profile.profilePic%}
+        <img src="{{profile.profilePic.url}}" alt="Profile Pic" width="30">
+    {%endif%}
+{%endblock navImg%}
 
 {%block section%}
     <div class="posting_wrapper">

@@ -16,7 +16,9 @@
 		</div>
 		{%if request.user.is_authenticated%}
         <div class="right-nav">
-			<div class="avatar"></div>
+			<div class="avatar">
+				{%block navImg%}{%endblock navImg%}
+			</div>
 			<a class="name" href="{%url 'profile' request.user.username%}">
 				<h4>
 					{{request.user.first_name}} {{request.user.last_name}}

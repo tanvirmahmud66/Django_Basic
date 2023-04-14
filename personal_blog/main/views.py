@@ -100,6 +100,7 @@ def logout_page(request):
 
 @login_required(login_url='signin')
 def home(request):
+    profile = Profile.objects.get(user=request.user)
     if request.method == "POST":
         user_model = User.objects.get(username=request.user)
         post = request.POST['postInput']
@@ -111,6 +112,7 @@ def home(request):
     posts = PostDB.objects.all()
     return render(request, 'home.html', {
         "posts": posts,
+        "profile": profile,
     })
 
 
@@ -167,17 +169,20 @@ def edit_profile(request):
 @login_required(login_url='signin')
 def delete_post(request, pk):
     post = PostDB.objects.get(id=pk)
+    profile = Profile.objects.get(user=request.user)
     if request.method == "POST":
         post.delete()
         return redirect('profile', request.user.username)
     return render(request, 'delete_post.html', {
         "post": post,
+        "profile": profile,
     })
 
 
 @login_required(login_url='signin')
 def edit_post(request, pk):
     posts = PostDB.objects.get(id=pk)
+    profile = Profile.objects.get(user=request.user)
     if request.method == "POST":
         update_post = request.POST["editField"]
         posts.post = update_post
@@ -185,6 +190,7 @@ def edit_post(request, pk):
         return redirect('profile', request.user.username)
     return render(request, 'edit_post.html', {
         "post": posts,
+        "profile": profile,
     })
 
 
@@ -197,4 +203,6 @@ def edit_pp(request):
         profile.profilePic = image
         profile.save()
         return redirect('profile', request.user.username)
-    return render(request, 'editPP.html')
+    return render(request, 'editPP.html', {
+        "profile": profile,
+    })

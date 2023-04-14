@@ -55,6 +55,7 @@ nav {
 .avatar {
 	width: 30px;
 	height: 30px;
+    overflow: hidden;
 	border-radius: 50%;
 	background-color: #515151;
 	margin-right: 10px;
