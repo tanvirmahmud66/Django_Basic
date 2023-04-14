@@ -23,8 +23,6 @@
 	border-radius: 50%;
 	background-color: #515151;
 	margin-bottom: 25px;
-    position: relative;
-    cursor: pointer;
 }
 .profile_pic img{
     width: 150px;
@@ -32,9 +30,6 @@
 }
 
 .pp_edit{
-    position: absolute;
-    right: 0;
-    bottom: 0;
     text-decoration: none;
     border: 1px solid #00b894;
 	background-color: #00b894;
