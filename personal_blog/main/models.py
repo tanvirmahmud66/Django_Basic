@@ -13,6 +13,7 @@ class Profile(models.Model):
     gender = models.CharField(max_length=150, blank=True, null=True)
     relationStatus = models.CharField(max_length=150, blank=True, null=True)
     area = models.CharField(max_length=200, blank=True, null=True)
+    profilePic = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self):
         return self.user.username

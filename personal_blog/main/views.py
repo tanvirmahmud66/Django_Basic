@@ -186,3 +186,15 @@ def edit_post(request, pk):
     return render(request, 'edit_post.html', {
         "post": posts,
     })
+
+
+@login_required(login_url='signin')
+def edit_pp(request):
+    profile = Profile.objects.get(user=request.user)
+    if request.method == "POST":
+        image = request.FILES["pp"]
+        print(image)
+        profile.profilePic = image
+        profile.save()
+        return redirect('profile', request.user.username)
+    return render(request, 'editPP.html')

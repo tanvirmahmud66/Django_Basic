@@ -6,7 +6,7 @@ from .models import Profile, PostDB
 
 class ProfileView(admin.ModelAdmin):
     list_display = ('user', 'userId', 'bio', 'profession',
-                    'workplace', 'gender', 'relationStatus', 'area')
+                    'workplace', 'gender', 'relationStatus', 'area', 'profilePic')
 
 
 class PostDBView(admin.ModelAdmin):
