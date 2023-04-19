@@ -3,6 +3,15 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+class Verification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    token = models.UUIDField()
+    is_verified = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+
+
 class Profile(models.Model):
     # id ------------this id is unique for Profile db
     user = models.ForeignKey(User, on_delete=models.CASCADE)

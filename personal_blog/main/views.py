@@ -2,10 +2,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .models import Profile, PostDB
+from .models import Profile, PostDB, Verification
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.timesince import timesince
+import uuid
+from django.core.mail import send_mail
+from django.contrib.sites.shortcuts import get_current_site
+from django.conf import settings
 # Create your views here.
 
 
@@ -13,16 +17,31 @@ from django.utils.timesince import timesince
 def signin_page(request):
     if request.user.is_authenticated:
         return redirect('home')
-    if request.method == "POST":
+    elif request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.info(request, "Invalid Username or Password!!!")
+        try:
+            user_model = User.objects.get(username=username)
+            if user_model:
+                verify_model = Verification.objects.get(user=user_model)
+                if verify_model.is_verified:
+                    user = authenticate(username=username, password=password)
+                    if user is not None:
+                        login(request, user)
+                        return redirect('home')
+                    else:
+                        messages.info(
+                            request, "Invalid Username or Password!")
+                        return redirect('signin')
+                else:
+                    messages.info(
+                        request, 'Your email is not verified. Please verify your email first.')
+                    return redirect('signin')
+        except Exception as e:
+            print(e)
+            messages.info(request, "Invalid Username or Password!")
             return redirect('signin')
+
     return render(request, 'signin_page.html')
 
 
@@ -54,20 +73,48 @@ def signup_page(request):
                 )
                 user.save()
                 user_model = User.objects.get(username=username)
-                new_profile = Profile.objects.create(
+                token = str(uuid.uuid4())
+                verify = Verification.objects.create(
                     user=user_model,
-                    userId=user_model.id
+                    token=token,
                 )
-                new_profile.save()
-                user_auth = authenticate(username=username, password=password)
-                if user_auth is not None:
-                    login(request, user_auth)
-                    return redirect('complete_profile')
-                else:
-                    return redirect('signup')
+                verify.save()
+                domain_name = get_current_site(request).domain
+                link = f"http://{domain_name}/verify/{username}/{token}/"
+                subject = "Email Verification"
+                message = f"Please Click This Link {link} to verify your registration process. Thanks in Advanced."
+                recipient_list = [email]
+                email_from = settings.EMAIL_HOST_USER
+                send_mail(
+                    subject,
+                    message,
+                    email_from,
+                    recipient_list,
+                    fail_silently=False
+                )
+                messages.info(
+                    request, "We have send a email for verification. Please check your email for complete registrations process.")
+                return render(request, 'notification.html')
         else:
             messages.info(request, "Password not matched")
     return render(request, 'signup_page.html')
+
+
+def verify(request, username, token):
+    verify_model = Verification.objects.get(token=token)
+    verify_model.is_verified = True
+    verify_model.save()
+    user_model = User.objects.get(username=username)
+    new_profile = Profile.objects.create(
+        user=user_model,
+        userId=user_model.id,
+    )
+    new_profile.save()
+    messages.success(request, 'Your Email Verified. Please Sign-In Again')
+    verified = True
+    return render(request, 'notification.html', {
+        "verified": verified
+    })
 
 
 def complete_profile(request):
