@@ -148,6 +148,9 @@ def logout_page(request):
 @login_required(login_url='signin')
 def home(request):
     profile = Profile.objects.get(user=request.user)
+    notification = False
+    if profile.bio is None or profile.workplace is None or profile.profession is None or profile.gender is None or profile.relationStatus is None or profile.area is None:
+        notification = True
     if request.method == "POST":
         user_model = User.objects.get(username=request.user)
         post = request.POST['postInput']
@@ -160,6 +163,7 @@ def home(request):
     return render(request, 'home.html', {
         "posts": posts,
         "profile": profile,
+        "notification": notification,
     })
 
 
