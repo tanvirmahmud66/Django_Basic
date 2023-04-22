@@ -13,6 +13,7 @@ from django.conf import settings
 # Create your views here.
 
 
+# ----------------------------------------------------------------------------signin page
 # @login_required(login_url='signin')
 def signin_page(request):
     if request.user.is_authenticated:
@@ -45,6 +46,7 @@ def signin_page(request):
     return render(request, 'signin_page.html')
 
 
+# --------------------------------------------------------------------signup page
 # @login_required(login_url='signin')
 def signup_page(request):
     if request.user.is_authenticated:
@@ -100,6 +102,7 @@ def signup_page(request):
     return render(request, 'signup_page.html')
 
 
+# ----------------------------------------------------------------------verify page
 def verify(request, username, token):
     verify_model = Verification.objects.get(token=token)
     verify_model.is_verified = True
@@ -117,6 +120,7 @@ def verify(request, username, token):
     })
 
 
+# -----------------------------------------------------------------------complete_profile
 def complete_profile(request):
     if request.method == "POST":
         workplace = request.POST["workplace"]
@@ -139,12 +143,14 @@ def complete_profile(request):
     return render(request, 'complete_profile.html')
 
 
+# -----------------------------------------------------------------logout_page
 def logout_page(request):
     if request.user.is_authenticated:
         logout(request)
     return redirect('signin')
 
 
+# -------------------------------------------------------------------home
 @login_required(login_url='signin')
 def home(request):
     profile = Profile.objects.get(user=request.user)
@@ -167,6 +173,7 @@ def home(request):
     })
 
 
+# -----------------------------------------------------------------profile page
 @login_required(login_url='signin')
 def profile_page(request, pk):
     user = User.objects.get(username=pk)
@@ -187,6 +194,23 @@ def profile_page(request, pk):
     })
 
 
+# --------------------------------------------------------------Other user profile page
+@login_required(login_url='singin')
+def other_userprofile(request, pk):
+    if pk == request.user.username:
+        return redirect('profile', request.user.username)
+    target_user = User.objects.get(username=pk)
+    target_user_post = PostDB.objects.filter(user=target_user)
+    target_user_profile = Profile.objects.get(user=target_user)
+    current_user_profile = Profile.objects.get(user=request.user)
+    return render(request, 'other_user.html', {
+        "user_posts": target_user_post,
+        "user_profile": target_user_profile,
+        "current_user_profile": current_user_profile,
+    })
+
+
+# ------------------------------------------------------------edit profile
 @login_required(login_url='signin')
 def edit_profile(request):
     user = User.objects.get(username=request.user.username)
@@ -217,6 +241,7 @@ def edit_profile(request):
     })
 
 
+# ----------------------------------------------------------delete page
 @login_required(login_url='signin')
 def delete_post(request, pk):
     post = PostDB.objects.get(id=pk)
@@ -230,6 +255,7 @@ def delete_post(request, pk):
     })
 
 
+# ------------------------------------------------------edit page
 @login_required(login_url='signin')
 def edit_post(request, pk):
     posts = PostDB.objects.get(id=pk)
@@ -245,6 +271,7 @@ def edit_post(request, pk):
     })
 
 
+# --------------------------------------------------------edit profile
 @login_required(login_url='signin')
 def edit_pp(request):
     profile = Profile.objects.get(user=request.user)

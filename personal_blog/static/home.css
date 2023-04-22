@@ -44,6 +44,10 @@ p{
     font-size: 1.4rem;
     font-weight: 500;
 }
+.post_view a{
+    text-decoration: none;
+    color: white;
+}
 .date_time{
     margin: 3px 0 15px 0;
     width: 100%;
