@@ -31,7 +31,7 @@ class Profile(models.Model):
 class PostDB(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     userId = models.IntegerField()
-    post = models.TextField()
+    post = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -42,3 +42,13 @@ class PostDB(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class PostComments(models.Model):
+    commenter = models.ForeignKey(User, on_delete=models.CASCADE)
+    postId = models.IntegerField()
+    comment = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.comment

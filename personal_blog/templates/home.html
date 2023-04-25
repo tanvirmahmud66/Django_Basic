@@ -48,6 +48,20 @@
                     <a class="delete_button" href="{%url 'delete' each.id%}">Delete Post</a>
                 </div>
                 {%endif%}
+                <hr>
+                <div class="button_group">
+                    <a class="comment_button" href="{%url 'comment' each.id%}">Add Comment</a>
+                </div>
+                <div class="comment_section">
+                    {%for each_comment in post_comment%}
+                        {%if each.id == each_comment.postId%}
+                            <div class="each_comment">
+                                <p class="commenter_name"> @{{each_comment.commenter.first_name}} {{each_comment.commenter.last_name}}</p>
+                                <p class="comment">{{each_comment.comment}}</p>
+                            </div>   
+                        {%endif%}
+                    {%endfor%}
+                </div>
             </div>
         </div>
         {%endfor%}       

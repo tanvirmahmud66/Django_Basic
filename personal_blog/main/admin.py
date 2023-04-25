@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, PostDB, Verification
+from .models import Profile, PostDB, Verification, PostComments
 
 # Register your models here.
 
@@ -10,13 +10,18 @@ class ProfileView(admin.ModelAdmin):
 
 
 class PostDBView(admin.ModelAdmin):
-    list_display = ('user', 'userId', 'post', 'created', 'updated')
+    list_display = ('id', 'user', 'userId', 'post', 'created', 'updated')
 
 
 class VerificationView(admin.ModelAdmin):
     list_display = ('user', 'token', 'is_verified')
 
 
+class PostCommentsView(admin.ModelAdmin):
+    list_display = ('id', 'postId', 'commenter', 'comment', 'created')
+
+
 admin.site.register(Profile, ProfileView)
 admin.site.register(PostDB, PostDBView)
 admin.site.register(Verification, VerificationView)
+admin.site.register(PostComments, PostCommentsView)

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .models import Profile, PostDB, Verification
+from .models import Profile, PostDB, Verification, PostComments
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.timesince import timesince
@@ -166,10 +166,12 @@ def home(request):
         new_post.save()
         return redirect('home')
     posts = PostDB.objects.all()
+    post_comment = PostComments.objects.all()
     return render(request, 'home.html', {
         "posts": posts,
         "profile": profile,
         "notification": notification,
+        "post_comment": post_comment,
     })
 
 
@@ -255,7 +257,7 @@ def delete_post(request, pk):
     })
 
 
-# ------------------------------------------------------edit page
+# ------------------------------------------------------edit post
 @login_required(login_url='signin')
 def edit_post(request, pk):
     posts = PostDB.objects.get(id=pk)
@@ -283,4 +285,24 @@ def edit_pp(request):
         return redirect('profile', request.user.username)
     return render(request, 'editPP.html', {
         "profile": profile,
+    })
+
+
+# -------------------------------------------------------------Comment on Post
+@login_required(login_url='signin')
+def comment_post(request, pk):
+    posts = PostDB.objects.get(id=pk)
+    post_all_comment = PostComments.objects.filter(postId=pk)
+    if request.method == "POST":
+        comment = request.POST['comment']
+        post_comment = PostComments.objects.create(
+            postId=pk,
+            commenter=request.user,
+            comment=comment,
+        )
+        post_comment.save()
+        return redirect('home')
+    return render(request, 'comment_post.html', {
+        "post": posts,
+        "post_all_comment": post_all_comment,
     })
