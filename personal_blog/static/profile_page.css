@@ -165,3 +165,42 @@
 	cursor: pointer;
     font-weight: 500;
 }
+
+hr{
+    margin: 1.5rem 0 0 0;
+}
+
+.comment_section{
+    display: flex;
+    flex-direction: column;
+}
+.comment_section .each_comment{
+    width: fit-content;
+    background: #061723;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+.commenter_name{
+    font-size: .8rem;
+    color: rgb(68, 136, 246);
+    margin-right: 5px;
+}
+.comment{
+    font-size: .8rem;
+    color: rgba(255, 255, 255, 0.627);
+}
+.post_view .comment_button{
+    margin-top: 10px;
+    text-decoration: none;
+    border: 1px solid #006bb8;
+	background-color: #006bb8;
+	color: #fff;
+	border-radius: 5px;
+	padding: 5px 10px;
+	cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 10px;
+}

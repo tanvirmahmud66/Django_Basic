@@ -181,6 +181,7 @@ def profile_page(request, pk):
     user = User.objects.get(username=pk)
     user_post = PostDB.objects.filter(user=user)
     profile = Profile.objects.get(user=user)
+    post_comment = PostComments.objects.all()
     if request.method == "POST":
         post = request.POST["postInput"]
         new_post = PostDB.objects.create(
@@ -193,6 +194,7 @@ def profile_page(request, pk):
     return render(request, 'profile_page.html', {
         "posts": user_post,
         "profile": profile,
+        "post_comment": post_comment,
     })
 
 
@@ -205,10 +207,12 @@ def other_userprofile(request, pk):
     target_user_post = PostDB.objects.filter(user=target_user)
     target_user_profile = Profile.objects.get(user=target_user)
     current_user_profile = Profile.objects.get(user=request.user)
+    post_comment = PostComments.objects.all()
     return render(request, 'other_user.html', {
         "user_posts": target_user_post,
         "user_profile": target_user_profile,
         "current_user_profile": current_user_profile,
+        "post_comment": post_comment,
     })
 
 
