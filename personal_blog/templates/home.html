@@ -19,6 +19,14 @@
             Please <a href="{%url 'complete_profile'%}"> Complete your Profile</a>
         </div>
 {%endif%}
+    <div class="all_user">
+        <h3>Users</h3>
+        <div class="users">
+            {%for user in all_user%}
+                <a href="{%url 'otherUserProfile' user.user.username %}">@{{user.user.first_name}} {{user.user.last_name}}</a>
+            {%endfor%}
+        </div>
+    </div>
     <div class="posting_wrapper">
         <div class="post">
             <form class="post_form" method="POST">

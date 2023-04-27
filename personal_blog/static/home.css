@@ -3,7 +3,7 @@ p{
 }
 .posting_wrapper{
     margin-top: 4.5rem;
-    width: 900px;
+    width: 750px;
     border-radius: 10px;
     color: white;
     display: flex;
@@ -65,7 +65,7 @@ p{
 }
 
 .post_view .button_group{
-    width: 25%;
+    width: 30%;
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
@@ -125,8 +125,49 @@ p{
     margin-left: 3px;
 }
 
+.all_user{
+    position: fixed;
+    top: 72px;
+    left: 20px;
+    z-index: 1;
+    width: 20%;
+    max-height: 735px;
+    border-radius: 15px;
+    background-color: #0F2333;
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: scroll;
+    padding-bottom: 1rem; 
+}
+.all_user h3{
+    font-size: 1rem;
+    font-weight: 300;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 85%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+.all_user .users{
+    width: 85%;
+    padding: .3rem 0;
+    display: flex;
+    flex-direction: column;
+}
+.users a{
+    text-decoration: none;
+    color: #006bb8;
+    margin: .2rem 0;
+}
+
 hr{
-    margin: 1.5rem 0 0 0;
+    margin: .7rem 0 0 0;
 }
 
 .comment_section{

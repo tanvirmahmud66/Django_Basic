@@ -167,11 +167,13 @@ def home(request):
         return redirect('home')
     posts = PostDB.objects.all()
     post_comment = PostComments.objects.all()
+    all_varified_users = Profile.objects.all()
     return render(request, 'home.html', {
         "posts": posts,
         "profile": profile,
         "notification": notification,
         "post_comment": post_comment,
+        "all_user": all_varified_users,
     })
 
 
