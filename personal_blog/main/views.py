@@ -10,6 +10,7 @@ import uuid
 from django.core.mail import send_mail
 from django.contrib.sites.shortcuts import get_current_site
 from django.conf import settings
+from django.db.models import Q
 # Create your views here.
 
 
@@ -153,6 +154,7 @@ def logout_page(request):
 # -------------------------------------------------------------------home
 @login_required(login_url='signin')
 def home(request):
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
     profile = Profile.objects.get(user=request.user)
     notification = False
     if profile.bio is None or profile.workplace is None or profile.profession is None or profile.gender is None or profile.relationStatus is None or profile.area is None:
@@ -165,7 +167,15 @@ def home(request):
         )
         new_post.save()
         return redirect('home')
-    posts = PostDB.objects.all()
+    if q != None:
+        posts = PostDB.objects.filter(
+            Q(user__username__icontains=q) |
+            Q(post__icontains=q) |
+            Q(user__first_name__icontains=q) |
+            Q(user__last_name__icontains=q)
+        )
+    else:
+        posts = PostDB.objects.all()
     post_comment = PostComments.objects.all()
     all_varified_users = Profile.objects.all()
     return render(request, 'home.html', {

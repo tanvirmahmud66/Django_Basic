@@ -1,4 +1,10 @@
-
+.delete_wraper{
+    width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
 .post_section{
     width: 600px;

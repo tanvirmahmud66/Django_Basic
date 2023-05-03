@@ -1,3 +1,10 @@
+.signin_wraper{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .signIn-green-btn {
 	background-color: #00b894;
 	color: #fff;

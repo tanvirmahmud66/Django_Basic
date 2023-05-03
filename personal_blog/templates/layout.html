@@ -14,7 +14,13 @@
 		<div class="left-nav">
 			<a href="{%url 'home'%}">Personal blog</a>
 		</div>
+		
 		{%if request.user.is_authenticated%}
+		<div class="search_section">
+			<form method="GET" action="{%url 'home'%}">
+			  <input type="search" name="q" placeholder="Search..."/>
+			</form>
+		  </div>
         <div class="right-nav">
 			<div class="avatar">
 				{%block navImg%}{%endblock navImg%}
@@ -28,7 +34,8 @@
 		</div>
         {%endif%}
 	</nav>
-	
-	{%block section%}{%endblock section%}
+	<div class="content">
+		{%block section%}{%endblock section%}
+	</div>	
 </body>
 </html>

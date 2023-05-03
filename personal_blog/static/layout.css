@@ -10,7 +10,7 @@ body {
     color: white;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 nav {
@@ -83,4 +83,24 @@ nav {
 }
 .messages p{
     margin-bottom: 20px;
+}
+
+.content{
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.search_section input[type="search"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    width: 450px;
+    /* box-shadow: 1px 1px 1px #ddd; */
+    background-color: #061723;
 }
